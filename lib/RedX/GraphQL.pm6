@@ -14,7 +14,7 @@ role RedX::GraphQL {
 		type { self.gql-type: $model } \{
 		{
 			$model.^attributes.grep({ .?gql-shared // False }).map({
-				"{ .?column.?attr-name // .name }: { $.translate($_, type) }{ $.translate($_, required) }"
+				"{ .?column.?attr-name // .name.substr: 2 }: { $.translate($_, type) }{ $.translate($_, required) }"
 			}).join("\n").indent: 4
 		}
 		\}
@@ -27,8 +27,8 @@ role RedX::GraphQL {
 	multi method translate-type(Str:D $type)   { $type       }
 	multi method translate-type(Mu:U $type)    { $type.^name }
 
-	multi method translate(RedX::GraphQL::Attr $_ where { .^can("relationship-model")  }, type) { self.translate-type: .relationship-model }
 	multi method translate(RedX::GraphQL::Attr $  where { .?column.id                  }, type) { "ID"                                     }
+	multi method translate(RedX::GraphQL::Attr $_ where { .^can("relationship-model")  }, type) { self.translate-type: .relationship-model }
 	multi method translate(RedX::GraphQL::Attr $_ where { .?column.?model-name         }, type) { self.translate-type: .column.model-name  }
 	multi method translate(RedX::GraphQL::Attr $_ where { !.^can("relationship-model") }, type) { self.translate-type: .type               }
 
