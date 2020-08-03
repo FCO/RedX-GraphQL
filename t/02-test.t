@@ -1,5 +1,6 @@
 use Red;
 use RedX::GraphQL;
+use Test;
 
 model Ble {}
 model Bla is gql-type {
@@ -8,4 +9,12 @@ model Bla is gql-type {
    has Str @.somethings is column{ :nullable } is shared;
    has     $.aaa        is relationship(*.id, :model<Ble>) is shared;
 }
-say Bla.^gql
+is Bla.^gql, Q:to/END/;
+type Bla {
+    id: ID!
+    name: String!
+    somethings: [String]
+    aaa: Ble
+}
+END
+done-testing
