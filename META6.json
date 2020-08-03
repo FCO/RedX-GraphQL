@@ -1,0 +1,20 @@
+{
+  "auth" : "cpan:FCO",
+  "authors" : [
+    "Fernando Corr\u00eaa de Oliveira"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "GraphQL plugin for Rex ORM",
+  "license" : "Artistic-2.0",
+  "name" : "RedX::GraphQL",
+  "perl" : "6.c",
+  "provides" : {
+    "RedX::GraphQL" : "lib/RedX/GraphQL.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
